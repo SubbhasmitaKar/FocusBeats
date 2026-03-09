@@ -1,0 +1,291 @@
+<!--wrote again-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{
+margin: 0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background-image:url("images/IMG_20260309_173839.png.jpeg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat; 
+
+}
+
+/* dark overlay */
+
+body::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:-1;
+}
+
+.container{
+
+width:350px;
+padding:30px;
+border-radius:15px;
+
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(12px);
+
+box-shadow:0 8px 25px rgba(0,0,0,0.3);
+
+color:white;
+text-align:center;
+
+}
+
+h2{
+margin-bottom:20px;
+}
+
+.input-box{
+margin:12px 0;
+}
+
+.input-box input{
+
+width:100%;
+padding:10px;
+
+border:none;
+outline:none;
+
+border-radius:8px;
+
+}
+
+.btn{
+
+width:100%;
+padding:10px;
+
+margin-top:15px;
+
+border:none;
+border-radius:8px;
+
+background:#ff7a18;
+color:white;
+
+font-size:16px;
+cursor:pointer;
+
+}
+
+.btn:hover{
+background:#ff5500;
+}
+
+.switch{
+
+margin-top:15px;
+font-size:14px;
+
+}
+
+.switch span{
+
+color:#ffd369;
+cursor:pointer;
+
+}
+
+/* hide register form initially */
+
+#registerForm{
+display:none;
+}
+
+.brand{
+
+position:absolute;
+top:20px;
+left:30px;
+
+display:flex;
+align-items:center;
+
+color:white;
+font-size:24px;
+font-weight:bold;
+
+}
+
+.brand-logo{
+
+width:40px;
+margin-right:10px;
+
+}
+
+.brand-name{
+
+letter-spacing:1px;
+
+}
+
+/* FULL SCREEN BLUR MESSAGE */
+
+.blur-screen{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+background:rgba(0,0,0,0.55);
+
+color:white;
+font-size:32px;
+font-weight:bold;
+
+display:none;
+
+z-index:100;
+text-align:center;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="brand">
+
+<img src= "images/IMG_20260309_173641.jpg.jpeg" class="brand-logo">
+
+<span class="brand-name">FocusBeats</span>
+
+</div>
+
+<div class="container">
+
+<!-- LOGIN FORM -->
+
+<div id="loginForm">
+
+<h2> Login</h2>
+
+<div class="input-box">
+<input type="text" placeholder="Username">
+</div>
+
+<div class="input-box">
+<input type="password" placeholder="Password">
+</div>
+
+<button class="btn" onclick="loginUser()">Login</button>
+
+<div class="switch">
+Don't have an account? 
+<span onclick="showRegister()">Register</span>
+</div>
+
+</div>
+
+<!-- REGISTER FORM -->
+
+<div id="registerForm">
+
+<h2>Create Account</h2>
+
+<div class="input-box">
+<input type="text" placeholder="Username">
+</div>
+
+<div class="input-box">
+<input type="email" placeholder="Email">
+</div>
+
+<div class="input-box">
+<input type="password" placeholder="Password">
+</div>
+
+<button class="btn" onclick="registerUser()">Register</button>
+
+<div class="switch">
+Already have an account? 
+<span onclick="showLogin()">Login</span>
+</div>
+
+</div>
+
+</div>
+
+<div id="blurScreen" class="blur-screen">
+<p id="blurMessage"></p>
+</div>
+
+<script>
+function showRegister(){
+  document.getElementById("loginForm").style.display="none";
+  document.getElementById("registerForm").style.display="block";
+}
+
+function showLogin(){
+  document.getElementById("registerForm").style.display="none";
+  document.getElementById("loginForm").style.display="block";
+}
+
+function registerUser(){
+  // Mark user as registered
+  localStorage.setItem("focusBeatsUser", "Registered");
+  showBlurMessage("Welcome to FocusBeats");
+}
+
+function loginUser(){
+  // Mark user as logged in
+  localStorage.setItem("focusBeatsUser", "LoggedIn");
+  showBlurMessage("Study Time!");
+}
+
+function showBlurMessage(message){
+  let blurScreen = document.getElementById("blurScreen");
+  let blurMessage = document.getElementById("blurMessage");
+
+  blurMessage.innerText = message;
+  blurScreen.style.display = "flex";
+
+  setTimeout(function(){
+    window.location.href="dashboard.html";
+  }, 3000);
+}
+</script>
+
+</body>
+</html>
+

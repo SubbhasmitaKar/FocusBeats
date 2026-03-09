@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>FocusBeats Dashboard</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  height:100vh;
+  background:linear-gradient(135deg,#2b2d42,#6a4c93);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+
+.container{
+  width:400px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
+  padding:30px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 8px 25px rgba(0,0,0,0.3);
+  position:relative;
+}
+
+h1{
+  margin-bottom:10px;
+}
+
+.song-list{
+  margin:20px 0;
+  text-align:left;
+}
+
+.song{
+  padding:6px 0;
+}
+
+.player-buttons button, .timer-buttons button{
+  margin:5px;
+  padding:8px 15px;
+  border:none;
+  border-radius:8px;
+  background:#ff7a18;
+  color:white;
+  cursor:pointer;
+}
+
+.timer{
+  margin-top:20px;
+  font-size:28px;
+}
+
+.logout-btn{
+  float:right;
+  margin-bottom:10px;
+  padding:5px 10px;
+  border:none;
+  border-radius:5px;
+  background:#ff5500;
+  color:white;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔹 LOGIN CHECK -->
+<script>
+  const userStatus = localStorage.getItem("focusBeatsUser");
+  if (!userStatus) {
+    window.location.href = "index.html"; // redirect if not logged in
+  }
+</script>
+
+<div class="container">
+
+  <!-- 🔹 LOGOUT BUTTON -->
+  <button class="logout-btn" onclick="logout()">Logout</button>
+
+  <h1>🎧 FocusBeats</h1>
+  <p>Focus Dashboard</p>
+
+  <div class="song-list">
+    <h3>Lofi Songs</h3>
+    <div class="song">• Rainy Study</div>
+    <div class="song">• Night Coding</div>
+    <div class="song">• Deep Focus</div>
+    <div class="song">• Calm Waves</div>
+  </div>
+
+  <div class="player-buttons">
+    <button>Play</button>
+    <button>Pause</button>
+    <button>Next</button>
+  </div>
+
+  <div class="timer">
+    ⏱ 25:00
+  </div>
+
+  <div class="timer-buttons">
+    <button>Start</button>
+    <button>Reset</button>
+  </div>
+
+</div>
+
+<!-- 🔹 LOGOUT FUNCTION -->
+<script>
+function logout(){
+  localStorage.removeItem("focusBeatsUser");
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
